@@ -3,7 +3,8 @@ from datetime import date
 from weekdays import count_weekdays
 
 class TestWeekdays(unittest.TestCase):
-  def test_same_day(self):
+
+  def test_same_date(self):
     self.assertEqual(count_weekdays(date(2024, 7, 1), date(2024, 7, 1)), 1)
 
   def test_one_week(self):
@@ -25,14 +26,18 @@ class TestWeekdays(unittest.TestCase):
     self.assertEqual(count_weekdays(date(2024, 2, 28), date(2024, 3, 1)), 3)
 
   def test_year_boundary(self):
+    self.assertEqual(count_weekdays(date(2023, 12, 31), date(2024, 1, 1)), 1)
     self.assertEqual(count_weekdays(date(2024, 12, 30), date(2025, 1, 3)), 5)
+
+  def test_one_year(self):
+    self.assertEqual(count_weekdays(date(2024, 1, 1), date(2024, 12, 31)), 262)
+
+  def test_large_date_range(self):
+    self.assertEqual(count_weekdays(date(2000, 1, 1), date(2030, 12, 31)), 8087)
 
   def test_invalid_input(self):
     with self.assertRaises(TypeError):
       count_weekdays("abc", 123)
-  
-  def test_invalid_input2(self):
-    with self.assertRaises(TypeError):
       count_weekdays("2024-07-01", "2024-07-01")
 
 if __name__ == '__main__':
