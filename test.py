@@ -30,6 +30,10 @@ class TestWeekdays(unittest.TestCase):
   def test_invalid_input(self):
     with self.assertRaises(TypeError):
       count_weekdays("abc", 123)
+  
+  def test_invalid_input2(self):
+    with self.assertRaises(TypeError):
+      count_weekdays("2024-07-01", "2024-07-01")
 
 if __name__ == '__main__':
   unittest.main()
