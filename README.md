@@ -1,16 +1,13 @@
 # TRS assessment - Weekday Counter
-
 Given two dates (inclusive), determine the number of weekdays between the two.
 
 ## Features
-
 - Counts weekdays (Monday through Friday) between two dates
 - Handles reversed date inputs automatically
 - Raises appropriate errors for invalid inputs
 
 ## Installation
 No additional installation is required. This module uses only Python standard libraries.
-
 
 ## Usage
 > check `weekdays_run.py`
@@ -33,12 +30,10 @@ print(f"Number of weekdays: {weekdays}")
 python weekdays_run.py
 ```
 
-
-## How to run unittests
+## How to run unit tests
 ```
 python test.py
 ```
-
 
 ## Potential improvements
 - use non standard libraries such as `dateutil` or `pandas` for more robust date handling
