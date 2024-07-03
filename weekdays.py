@@ -7,10 +7,10 @@ def count_weekdays(start_date: date, end_date: date) -> int:
 
   Args:
     start_date (date): The starting date of the period to count.
-    end_date (date): The ending date of the period to count.
+    end_date (date):   The ending date of the period to count.
 
   Returns:
-    int: The number of weekdays (Monday through Friday) in the period.
+    int:               The number of weekdays (Monday through Friday) in the period.
   """  
 
   if not isinstance(start_date, date) or not isinstance(end_date, date):
