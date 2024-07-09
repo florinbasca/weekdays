@@ -10,11 +10,11 @@ Given two dates (inclusive), determine the number of weekdays between the two.
 No additional installation is required. This module uses only Python standard libraries.
 
 ## Usage
-> check `weekdays_run.py`
+> check `run.py`
 
 ```python
 from datetime import date
-from weekdays import count_weekdays
+from lib import count_weekdays
 
 start_date = date(2023, 1, 1)
 end_date   = date(2023, 12, 31)
@@ -27,7 +27,7 @@ print(f"Number of weekdays: {weekdays}")
 
 ## How to run
 ```
-python weekdays_run.py
+python run.py
 ```
 
 ## How to run unit tests

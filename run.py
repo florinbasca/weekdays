@@ -1,5 +1,5 @@
 from datetime import date
-from weekdays import count_weekdays
+from lib import count_weekdays
 
 start_date = date(2023, 1, 1)
 end_date   = date(2023, 12, 31)
