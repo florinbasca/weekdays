@@ -3,9 +3,9 @@ from datetime import date
 from lib import count_weekdays, calendar_days, is_leap_year
 
 
-def ref(start_date, end_date):
+def ref(start, end):
   ''' Reference implementation for calendar days '''
-  return (end_date - start_date).days +1
+  return (end - start).days +1
 
 
 class TestWeekdays(unittest.TestCase):
@@ -50,71 +50,89 @@ class TestWeekdays(unittest.TestCase):
 class TestCalendarDays(unittest.TestCase):
 
   def test_same_date(self):
-    start_date = date(2023, 7, 1)
-    end_date   = date(2023, 7, 1)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2023, 7, 1)
+    end   = date(2023, 7, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_same_month(self):
-    start_date = date(2023, 7, 1)
-    end_date   = date(2023, 7, 15)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2023, 7, 1)
+    end   = date(2023, 7, 15)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_across_months_same_year(self):
-    start_date = date(2023, 6, 15)
-    end_date   = date(2023, 7, 1)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2023, 6, 15)
+    end   = date(2023, 7, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_across_years(self):
-    start_date = date(2022, 12, 20)
-    end_date   = date(2023, 1, 10)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2022, 12, 20)
+    end   = date(2023, 1, 10)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
-  def test_across_leap_year(self):
-    start_date = date(2023, 2, 20)
-    end_date   = date(2024, 3, 10)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+  def test_across_leap_years_with_various_distance(self):
+    start = date(2019, 1, 1)
+    end   = date(2020, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2019, 1, 1)
+    end   = date(2021, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2019, 1, 1)
+    end   = date(2022, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2019, 1, 1)
+    end   = date(2023, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2019, 1, 1)
+    end   = date(2024, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2018, 1, 1)
+    end   = date(2021, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2018, 1, 1)
+    end   = date(2022, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2017, 1, 1)
+    end   = date(2021, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_start_after_end(self):
-    start_date = date(2023, 7, 15)
-    end_date   = date(2023, 7, 1)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2023, 7, 15)
+    end   = date(2023, 7, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_start_before_end_leap_year(self):
-    start_date = date(2024, 2, 28)
-    end_date   = date(2024, 3, 1)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2024, 2, 28)
+    end   = date(2024, 3, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_start_before_end_non_leap_year(self):
-    start_date = date(2023, 2, 28)
-    end_date   = date(2023, 3, 1)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2023, 2, 28)
+    end   = date(2023, 3, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_end_of_february_leap_year(self):
-    start_date = date(2020, 2, 28)
-    end_date   = date(2020, 2, 29)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2020, 2, 28)
+    end   = date(2020, 2, 29)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_end_of_february_non_leap_year(self):
-    start_date = date(2021, 2, 28)
-    end_date   = date(2021, 3, 1)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(2021, 2, 28)
+    end   = date(2021, 3, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_spanning_century(self):
-    start_date = date(1999, 12, 31)
-    end_date   = date(2000, 1, 1)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(1999, 12, 31)
+    end   = date(2000, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
   def test_min_max_dates(self):
-    start_date = date(1, 1, 1)
-    end_date   = date(9999, 12, 31)
-    self.assertEqual(calendar_days(start_date, end_date), ref(start_date, end_date))
+    start = date(1, 1, 1)
+    end   = date(9999, 12, 31)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
 
-  def test_start_date_before_min_date(self):
+  def test_invalid_dates(self):
     with self.assertRaises(ValueError):
-      calendar_days(date(0, 1, 1), date(2023, 7, 1))
-
-  def test_end_date_after_max_date(self):
-    with self.assertRaises(ValueError):
+      calendar_days(date(0, 1, 1),    date(2023, 7, 1))
       calendar_days(date(2023, 7, 1), date(10000, 1, 1))
 
 
