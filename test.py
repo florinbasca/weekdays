@@ -54,6 +54,14 @@ class TestCalendarDays(unittest.TestCase):
     end   = date(2023, 7, 1)
     self.assertEqual(calendar_days(start, end), ref(start, end))
 
+  def test_same_date_leap_year(self):
+    start = date(2000, 1, 1)
+    end   = date(2001, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+    start = date(2003, 1, 1)
+    end   = date(2004, 1, 1)
+    self.assertEqual(calendar_days(start, end), ref(start, end))
+
   def test_same_month(self):
     start = date(2023, 7, 1)
     end   = date(2023, 7, 15)

@@ -51,16 +51,27 @@ def calendar_days(start: date, end: date) -> int:
 
   # step 1. intra year difference, assume both dates are in the same year, can have a positive or negative difference
   days: int = end.day - start.day
-  if (start.month, start.day) <= (end.month, end.day):
+  if (start.month, start.day) == (end.month, end.day):
+    # start and end are the same day and month
+
+    # adjust for leap year of start date
+    if is_leap_year(start.year) and start.month <= 2 and start.year != end.year:
+      days += 1
+    # adjust for leap year of end date
+    if is_leap_year(end.year) and 2 < end.month and start.year != end.year:
+      days += 1
+
+  elif (start.month, start.day) < (end.month, end.day):
     # start is before end - positive difference
     for month in range(start.month - 1, end.month - 1):
       days += days_in_month[month]
 
     # adjust for leap year of start date
-    if is_leap_year(start.year) and start.month <= 2 < end.month:
+    if is_leap_year(start.year) and start.month <= 2 and (start.year != end.year or end.month > 2):
       days += 1
+
     # adjust for leap year of end date
-    if is_leap_year(end.year) and 2 < end.month and start.year != end.year:
+    if is_leap_year(end.year) and 2 < end.month and end.year != start.year:
       days += 1
 
   else:
